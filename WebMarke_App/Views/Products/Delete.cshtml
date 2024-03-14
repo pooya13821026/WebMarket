@@ -1,0 +1,45 @@
+﻿@model Product
+@{
+    ViewData["Title"] = "Delete";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<form method="post" asp-action="deletepost" enctype="multipart/form-data">
+    <input asp-for="Id" type="hidden" />
+    <input asp-for="Img" type="hidden" />
+    <div class="border p-3 mt-4">
+        <div class="row pb-2">
+            <h2>حذف محصول</h2>
+            <hr />
+            <div class="mb-3">
+                <label asp-for="Title"></label>
+                <input asp-for="Title" class="form-control" />
+                <span asp-validation-for="Title" class="text-danger"></span>
+            </div>
+            <div class="mb-3">
+                <label asp-for="Description"></label>
+                <textarea asp-for="Description" class="form-control"></textarea>
+                <span asp-validation-for="Description" class="text-danger"></span>
+            </div>
+            <div class="row">
+                <div class="col-6 mb-3">
+                    <label asp-for="Price"></label>
+                    <input asp-for="Price" class="form-control" />
+                    <span asp-validation-for="Price" class="text-danger"></span>
+                </div>
+                <div class="col-6 mb-3">
+                    <label asp-for="Cooler"></label>
+                    <input asp-for="Cooler" class="form-control" />
+                    <span asp-validation-for="Cooler" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="mb-3">
+                <label asp-for="Img"></label>
+                <input type="file" name="file" class="form-control" />
+            </div>
+            <div class="col-12">
+                <button type="submit" class="btn btn-outline-dark m-auto" style="width:150px">حذف محصول</button>
+            </div>
+        </div>
+    </div>
+</form>

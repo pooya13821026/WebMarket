@@ -1,0 +1,625 @@
+﻿@model IEnumerable<Product>
+@{
+    ViewData["Title"] = "Index";
+}
+
+<html class="js sizes customelements history pointerevents postmessage postmessage-structuredclones webgl websockets cssanimations csscolumns csscolumns-width csscolumns-span csscolumns-fill csscolumns-gap csscolumns-rule csscolumns-rulecolor csscolumns-rulestyle csscolumns-rulewidth csscolumns-breakbefore csscolumns-breakafter csscolumns-breakinside flexbox picture srcset webworkers" lang="en">
+<!-- Mirrored from htmldemo.net/rozer/rozer/shop-left-sidebar.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 23 Jan 2023 11:15:11 GMT -->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>Rozer – قالب فروشگاهی</title>
+    <meta name="robots" content="noindex, follow">
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- Favicon -->
+    <link rel="shortcut icon" type="image/x-icon" href="/template/static/images/favicon/favicon.png">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i,800&amp;display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/template/static/css/vendor/bootstrap.min.css">
+    <link rel="stylesheet" href="/template/static/css/vendor/ionicons.min.css">
+    <link rel="stylesheet" href="/template/static/css/vendor/simple-line-icons.css">
+    <link rel="stylesheet" href="/template/static/css/vendor/font-awesome.min.css">
+    <link rel="stylesheet" href="/template/static/css/plugins/animate.css">
+    <link rel="stylesheet" href="/template/static/css/plugins/jquery-ui.min.css">
+    <link rel="stylesheet" href="/template/static/css/plugins/swiper.css">
+    <link rel="stylesheet" href="/template/static/css/vendor/vendor.min.css">
+    <link rel="stylesheet" href="/template/static/css/plugins/plugins.min.css">
+    <link rel="stylesheet" href="/template/static/css/style.min.css">
+    <link rel="stylesheet" href="/template/static/css/style.css" />
+</head>
+
+<body>
+    <!-- Header Section Start From Here -->
+    <header class="header-wrapper">
+        <!-- Header Nav End -->
+        <div class="header-top bg-white ptb-30px d-xl-block d-none">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-2">
+                        <div class="logo">
+                            <a href="index.html"><img class="img-responsive" src="/template/static/images/logo/logo.png" alt="logo.jpg"></a>
+                        </div>
+                    </div>
+                    <div class="col-md-10 align-self-center">
+                        <div class="header-right-element d-flex">
+                            <div class="search-element media-body">
+                                <form class="d-flex" method="get" asp-action="Index">
+                                    <div class="search-category">
+                                        <select>
+                                            <option value="0">دسته بندی ها</option>
+                                            <option value="12">لپ تاپ</option>
+                                            <option value="104">کنسول بازی</option>
+                                            <option value="105">پخش کننده موسیقی</option>
+                                            <option value="106">تلویزیون</option>
+                                            <option value="107">ساعت</option>
+                                            <option value="108">لوازم جانبی</option>
+                                            <option value="109">دوربین</option>
+                                            <option value="110">لوازم خانه</option>
+                                        </select>
+                                    </div>
+                                    <input type="search" name="searche" placeholder="جستجو ... ">
+                                    <button value="searche"><i class="icon-magnifier"></i></button>
+                                </form>
+                            </div>
+                            <div class="contact-link">
+                                <div class="phone tm-ltr">
+                                    <p class="tm-rtl">تلفن ما :</p>
+                                    <a class="tm-ltr" href="tel:02100000000">021 0000 0000</a>
+                                </div>
+                            </div>
+                            <!--Cart info Start -->
+                            <div class="header-tools d-flex">
+                                <div class="cart-info d-flex align-self-center">
+                                    <a asp-controller="Products" asp-action="Create">ایجاد محصول</a>
+                                </div>
+                            </div>
+                        </div>
+                        <!--Cart info End -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+    <!-- Header Section End Here -->
+    <!-- Mobile Header Section Start -->
+    <div class="mobile-header d-xl-none sticky-nav bg-white ptb-10px">
+        <div class="container">
+            <div class="row align-items-center">
+
+                <!-- Header Logo Start -->
+                <div class="col">
+                    <div class="header-logo">
+                        <a href="index.html"><img class="img-responsive" src="/template/static/images/logo/logo.png" alt="logo.jpg"></a>
+                    </div>
+                </div>
+                <!-- Header Logo End -->
+                <!-- Header Tools Start -->
+                <div class="col-auto">
+                    <div class="header-tools justify-content-end">
+                        <div class="cart-info d-flex align-self-center">
+                            <a href="compare.html" class="shuffle d-xs-none" data-number="3"><i class="icon-shuffle"></i></a>
+                            <a href="#offcanvas-wishlist" class="heart offcanvas-toggle d-xs-none" data-number="3"><i class="icon-heart"></i></a>
+                            <a href="#offcanvas-cart" class="bag offcanvas-toggle" data-number="3"><span>200.000 تومان</span><i class="icon-bag" style="float: right; margin-top: 8px;"></i></a>
+                        </div>
+                        <div class="mobile-menu-toggle">
+                            <a href="#offcanvas-mobile-menu" class="offcanvas-toggle">
+                                <svg viewBox="0 0 800 600">
+                                    <path d="M300,220 C300,220 520,220 540,220 C740,220 640,540 520,420 C440,340 300,200 300,200" id="top"></path>
+                                    <path d="M300,320 L540,320" id="middle"></path>
+                                    <path d="M300,210 C300,210 520,210 540,210 C740,210 640,530 520,410 C440,330 300,190 300,190" id="bottom" transform="translate(480, 320) scale(1, -1) translate(-480, -318) "></path>
+                                </svg>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <!-- Header Tools End -->
+
+            </div>
+        </div>
+    </div>
+
+    <div id="offcanvas-wishlist" class="offcanvas offcanvas-wishlist">
+        <div class="inner">
+            <div class="head">
+                <span class="title">علاقه مندی ها</span>
+                <button class="offcanvas-close">×</button>
+            </div>
+            <div class="body customScroll">
+                <ul class="minicart-product-list">
+                    <li>
+                        <a href="single-product.html" class="image"><img src="/template/static/images/product-image/7.jpg" alt="Cart product Image"></a>
+                        <div class="content">
+                            <a href="single-product.html" class="title">عنوان محصول</a>
+                            <span class="quantity-price">1 x <span class="amount tm1">50.000 تومان</span></span>
+                            <a href="#" class="remove">×</a>
+                        </div>
+                    </li>
+                    <li>
+                        <a href="single-product.html" class="image"><img src="/template/static/images/product-image/9.jpg" alt="Cart product Image"></a>
+                        <div class="content">
+                            <a href="single-product.html" class="title">عنوان محصول</a>
+                            <span class="quantity-price">1 x <span class="amount tm1">50.000 تومان</span></span>
+                            <a href="#" class="remove">×</a>
+                        </div>
+                    </li>
+                    <li>
+                        <a href="single-product.html" class="image"><img src="/template/static/images/product-image/8.jpg" alt="Cart product Image"></a>
+                        <div class="content">
+                            <a href="single-product.html" class="title">عنوان محصول</a>
+                            <span class="quantity-price">1 x <span class="amount tm1">50.000 تومان</span></span>
+                            <a href="#" class="remove">×</a>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <div class="foot">
+                <div class="buttons">
+                    <a href="wishlist.html" class="btn btn-dark btn-hover-primary mt-30px">مشاهده لیست علاقه مندی ها</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- OffCanvas Wishlist End -->
+    <!-- OffCanvas Cart Start -->
+    <div id="offcanvas-cart" class="offcanvas offcanvas-cart">
+        <div class="inner">
+            <div class="head">
+                <span class="title">سبد خرید</span>
+                <button class="offcanvas-close">×</button>
+            </div>
+            <div class="body customScroll">
+                <ul class="minicart-product-list">
+                    <li>
+                        <a href="single-product.html" class="image"><img src="/template/static/images/product-image/1.jpg" alt="Cart product Image"></a>
+                        <div class="content">
+                            <a href="single-product.html" class="title">عنوان محصول</a>
+                            <span class="quantity-price">1 x <span class="amount tm1">50.000 تومان</span></span>
+                            <a href="#" class="remove">×</a>
+                        </div>
+                    </li>
+                    <li>
+                        <a href="single-product.html" class="image"><img src="/template/static/images/product-image/2.jpg" alt="Cart product Image"></a>
+                        <div class="content">
+                            <a href="single-product.html" class="title">عنوان محصول</a>
+                            <span class="quantity-price">1 x <span class="amount tm1">50.000 تومان</span></span>
+                            <a href="#" class="remove">×</a>
+                        </div>
+                    </li>
+                    <li>
+                        <a href="single-product.html" class="image"><img src="/template/static/images/product-image/3.jpg" alt="Cart product Image"></a>
+                        <div class="content">
+                            <a href="single-product.html" class="title">عنوان محصول</a>
+                            <span class="quantity-price">1 x <span class="amount tm1">50.000 تومان</span></span>
+                            <a href="#" class="remove">×</a>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <div class="foot">
+                <div class="sub-total">
+                    <strong>جمع :</strong>
+                    <span class="amount">200.000 تومان</span>
+                </div>
+                <div class="buttons">
+                    <a href="cart.html" class="btn btn-dark btn-hover-primary mb-30px">مشاهده سبد خرید</a>
+                    <a href="checkout.html" class="btn btn-outline-dark current-btn">تسویه حساب</a>
+                </div>
+                <p class="minicart-message">ارسال رایگان برای سفارشات بالای 500.000 تومان!</p>
+            </div>
+        </div>
+    </div>
+    <div class="offcanvas-overlay"></div>
+    <div class="shop-category-area mt-30px">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-9 order-lg-last col-md-12 order-md-first">
+                    <div class="shop-bottom-area mt-35">
+                        <!-- Shop Tab Content Start -->
+                        <div class="tab-content jump">
+                            <!-- Tab One Start -->
+                            <div id="shop-1" class="tab-pane active">
+                                <div class="row responsive-md-class responsive-xl-class responsive-lg-class">
+                                    @foreach (var item in Model)
+                                    {
+                                        <div class="col-xl-3 col-md-4 col-sm-6 ">
+                                            <article class="list-product">
+                                                <div class="img-block">
+                                                    <a href="single-product.html" class="thumbnail">
+                                                        <img class="first-img" src="@item.Img" alt="@item.Title">
+                                                    </a>
+                                                </div>
+                                                <div class="product-decs">
+                                                    <a class="inner-link" href="shop-4-column.html"><span>@item.Title</span></a>
+                                                    <h2><a href="single-product.html" class="product-link">@item.Description</a></h2>
+                                                    <div class="rating-product">
+                                                        <i class="ion-android-star"></i>
+                                                        <i class="ion-android-star"></i>
+                                                        <i class="ion-android-star"></i>
+                                                        <i class="ion-android-star"></i>
+                                                        <i class="ion-android-star"></i>
+                                                    </div>
+                                                    <div class="pricing-meta">
+                                                        <ul>
+                                                            <li class="old-price not-cut">@item.Price تومان</li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                                <div class="add-to-link">
+                                                    <ul>
+                                                        <li class="cart"><a class="cart-btn" asp-controller="products" asp-action="edit" asp-route-id="@item.Id">ویرایش</a></li>
+                                                        <li class="cart"><a class="cart-btn" asp-controller="products" asp-action="delete" asp-route-id="@item.Id">حذف</a></li>
+                                                    </ul>
+                                                </div>
+                                            </article>
+                                        </div>
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                        <div class="pro-pagination-style text-center mb-60px mt-30px">
+                            <ul>
+                                <li>
+                                    <a class="prev" href="#"><i class="ion-ios-arrow-right"></i></a>
+                                </li>
+                                <li><a class="active" href="#">1</a></li>
+                                <li><a href="#">2</a></li>
+                                <li>
+                                    <a class="next" href="#"><i class="ion-ios-arrow-left"></i></a>
+                                </li>
+                            </ul>
+                        </div>
+                        <!--  Pagination Area End -->
+                    </div>
+                    <!-- Shop Bottom Area End -->
+                </div>
+                <!-- Sidebar Area Start -->
+                <div class="col-lg-3 order-lg-first col-md-12 order-md-last mb-md-60px mb-lm-60px">
+                    <div class="shop-sidebar-wrap">
+                        <div class="sidebar-widget padding-30px bg-light-gray-2 mb-30px">
+                            <h3 class="sidebar-title">لوازم الکترونیکی</h3>
+                            <div class="accordion" id="accordionExample">
+                                <div class="card">
+                                    <div class="card-header" id="headingOne">
+                                        <a href="#" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne" class="collapsed">دسته شماره یک</a>
+                                    </div>
+
+                                    <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample" style="">
+                                        <div class="card-body">
+                                            <ul class="category-list">
+                                                <li><a href="#">زیر دسته 1</a></li>
+                                                <li><a href="#">زیر دسته 2</a></li>
+                                                <li><a href="#">زیر دسته 3</a></li>
+                                                <li><a href="#">زیر دسته 4</a></li>
+                                                <li><a href="#">زیر دسته 5</a></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div> <!-- card -->
+                                <div class="card">
+                                    <div class="card-header" id="headingTwo">
+                                        <a href="#" class="collapsed" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">دسته شماره دو</a>
+                                    </div>
+                                    <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample" style="">
+                                        <div class="card-body">
+                                            <ul class="category-list">
+                                                <li><a href="#">زیر دسته 1</a></li>
+                                                <li><a href="#">زیر دسته 2</a></li>
+                                                <li><a href="#">زیر دسته 3</a></li>
+                                                <li><a href="#">زیر دسته 4</a></li>
+                                                <li><a href="#">زیر دسته 5</a></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div> <!-- card -->
+                                <div class="card">
+                                    <div class="card-header" id="headingThree">
+                                        <a href="#" class="collapsed" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">دسته شماره سه</a>
+                                    </div>
+                                    <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionExample" style="">
+                                        <div class="card-body">
+                                            <ul class="category-list">
+                                                <li><a href="#">زیر دسته 1</a></li>
+                                                <li><a href="#">زیر دسته 2</a></li>
+                                                <li><a href="#">زیر دسته 3</a></li>
+                                                <li><a href="#">زیر دسته 4</a></li>
+                                                <li><a href="#">زیر دسته 5</a></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div> <!-- card -->
+                                <div class="card">
+                                    <div class="card-header" id="headingFour">
+                                        <a href="#" class="collapsed" data-bs-toggle="collapse" data-bs-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">دسته شماره چهار</a>
+                                    </div>
+                                    <div id="collapseFour" class="collapse" aria-labelledby="headingFour" data-parent="#accordionExample">
+                                        <div class="card-body">
+                                            <ul class="category-list">
+                                                <li><a href="#">زیر دسته 1</a></li>
+                                                <li><a href="#">زیر دسته 2</a></li>
+                                                <li><a href="#">زیر دسته 3</a></li>
+                                                <li><a href="#">زیر دسته 4</a></li>
+                                                <li><a href="#">زیر دسته 5</a></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div> <!-- card -->
+                                <div class="card">
+                                    <div class="card-header" id="headingFive">
+                                        <a href="#" class="collapsed" data-bs-toggle="collapse" data-bs-target="#collapseFive" aria-expanded="false" aria-controls="collapseFive">دسته شماره پنج</a>
+                                    </div>
+                                    <div id="collapseFive" class="collapse" aria-labelledby="headingFive" data-parent="#accordionExample">
+                                        <div class="card-body">
+                                            <ul class="category-list">
+                                                <li><a href="#">زیر دسته 1</a></li>
+                                                <li><a href="#">زیر دسته 2</a></li>
+                                                <li><a href="#">زیر دسته 3</a></li>
+                                                <li><a href="#">زیر دسته 4</a></li>
+                                                <li><a href="#">زیر دسته 5</a></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div> <!-- card -->
+                                <div class="card">
+                                    <div class="card-header" id="headingSix">
+                                        <a href="#" class="collapsed" data-bs-toggle="collapse" data-bs-target="#collapseSix" aria-expanded="false" aria-controls="collapseSix">دسته شماره شش</a>
+                                    </div>
+                                    <div id="collapseSix" class="collapse" aria-labelledby="headingSix" data-parent="#accordionExample">
+                                        <div class="card-body">
+                                            <ul class="category-list">
+                                                <li><a href="#">زیر دسته 1</a></li>
+                                                <li><a href="#">زیر دسته 2</a></li>
+                                                <li><a href="#">زیر دسته 3</a></li>
+                                                <li><a href="#">زیر دسته 4</a></li>
+                                                <li><a href="#">زیر دسته 5</a></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div> <!-- card -->
+                            </div>
+                        </div>
+                        <!-- Sidebar single item -->
+                        <div class="sidebar-widget-group mt-20 padding-30px">
+                            <h3 class="sidebar-title">فیلتر</h3>
+                            <div class="sidebar-widget mt-20">
+                                <h4 class="pro-sidebar-title">قیمت</h4>
+                                <form method="post" asp-action="index">
+                                    <label for="min">Min</label>
+                                    <input name="min" type="number" id="min" class="form-control" />
+                                    <label for="max">Max</label>
+                                    <input name="max" type="number" id="max" class="form-control" />
+                                    <button type="submit" class="btn-dark btn">Filter</button>
+                                </form>
+                            </div>
+                            <!-- Sidebar single item -->
+                            <div class="sidebar-widget mt-30">
+                                <h4 class="pro-sidebar-title">اندازه</h4>
+                                <div class="sidebar-widget-list">
+                                    <ul>
+                                        <li>
+                                            <div class="sidebar-widget-list-left">
+                                                <input type="checkbox"> <a href="#">اندازه 1<span>(4)</span> </a>
+                                                <span class="checkmark"></span>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <div class="sidebar-widget-list-left">
+                                                <input type="checkbox" value=""> <a href="#">اندازه 2<span>(4)</span></a>
+                                                <span class="checkmark"></span>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <div class="sidebar-widget-list-left">
+                                                <input type="checkbox" value=""> <a href="#">اندازه 3<span>(4)</span> </a>
+                                                <span class="checkmark"></span>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <div class="sidebar-widget-list-left">
+                                                <input type="checkbox" value=""> <a href="#">اندازه 4<span>(4)</span> </a>
+                                                <span class="checkmark"></span>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <!-- Sidebar single item -->
+                            <div class="sidebar-widget no-cba mt-20">
+                                <h4 class="pro-sidebar-title">رنگ</h4>
+                                <div class="sidebar-widget-list">
+                                    <ul>
+                                        <li>
+                                            <div class="sidebar-widget-list-left">
+                                                <input type="checkbox"> <a href="#">خاکستری<span>(2)</span> </a>
+                                                <span class="checkmark grey"></span>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <div class="sidebar-widget-list-left">
+                                                <input type="checkbox" value=""> <a href="#">سفید<span>(4)</span></a>
+                                                <span class="checkmark white"></span>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <div class="sidebar-widget-list-left">
+                                                <input type="checkbox" value=""> <a href="#">سیاه<span>(4)</span> </a>
+                                                <span class="checkmark black"></span>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <div class="sidebar-widget-list-left">
+                                                <input type="checkbox" value=""> <a href="#">شتری<span>(4)</span> </a>
+                                                <span class="checkmark brown"></span>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <!-- Sidebar single item -->
+                            <div class="sidebar-widget mt-30">
+                                <h4 class="pro-sidebar-title">نام تجاری</h4>
+                                <div class="sidebar-widget-list">
+                                    <ul>
+                                        <li>
+                                            <div class="sidebar-widget-list-left">
+                                                <input type="checkbox"> <a href="#">عنوان شماره یک<span>(10)</span> </a>
+                                                <span class="checkmark"></span>
+                                            </div>
+                                        </li>
+                                        <li>
+                                            <div class="sidebar-widget-list-left">
+                                                <input type="checkbox" value=""> <a href="#">عنوان شماره دو<span>(7)</span></a>
+                                                <span class="checkmark"></span>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Sidebar single item -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close"><span aria-hidden="true">x</span></button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-5 col-sm-12 col-xs-12 mb-lm-100px mb-sm-30px">
+                            <!-- Swiper -->
+                            <div class="swiper-container gallery-top swiper-initialized swiper-horizontal swiper-pointer-events swiper-rtl">
+                                <div class="swiper-wrapper" id="swiper-wrapper-f124aaee210b3eed9" aria-live="polite" style="transform: translate3d(0px, 0px, 0px);">
+                                    <div class="swiper-slide swiper-slide-active" role="group" aria-label="1 / 4" style="width: 447px;">
+                                        <img class="img-responsive m-auto" src="/template/static/images/product-image/11.jpg" alt="">
+                                    </div>
+                                    <div class="swiper-slide swiper-slide-next" role="group" aria-label="2 / 4" style="width: 447px;">
+                                        <img class="img-responsive m-auto" src="/template/static/images/product-image/12.jpg" alt="">
+                                    </div>
+                                    <div class="swiper-slide" role="group" aria-label="3 / 4" style="width: 447px;">
+                                        <img class="img-responsive m-auto" src="/template/static/images/product-image/13.jpg" alt="">
+                                    </div>
+                                    <div class="swiper-slide" role="group" aria-label="4 / 4" style="width: 447px;">
+                                        <img class="img-responsive m-auto" src="/template/static/images/product-image/14.jpg" alt="">
+                                    </div>
+                                </div>
+                                <span class="swiper-notification" aria-live="assertive" aria-atomic="true"></span>
+                            </div>
+                            <div class="swiper-container gallery-thumbs swiper-initialized swiper-horizontal swiper-pointer-events swiper-free-mode swiper-rtl swiper-thumbs">
+                                <div class="swiper-wrapper" id="swiper-wrapper-360a8fbc347810ec6" aria-live="polite" style="transform: translate3d(0px, 0px, 0px);">
+                                    <div class="swiper-slide swiper-slide-visible swiper-slide-active swiper-slide-thumb-active" role="group" aria-label="1 / 4" style="width: 104.25px; margin-left: 10px;">
+                                        <img class="img-responsive m-auto" src="/template/static/images/product-image/11.jpg" alt="">
+                                    </div>
+                                    <div class="swiper-slide swiper-slide-visible swiper-slide-next" role="group" aria-label="2 / 4" style="width: 104.25px; margin-left: 10px;">
+                                        <img class="img-responsive m-auto" src="/template/static/images/product-image/12.jpg" alt="">
+                                    </div>
+                                    <div class="swiper-slide swiper-slide-visible" role="group" aria-label="3 / 4" style="width: 104.25px; margin-left: 10px;">
+                                        <img class="img-responsive m-auto" src="/template/static/images/product-image/13.jpg" alt="">
+                                    </div>
+                                    <div class="swiper-slide swiper-slide-visible" role="group" aria-label="4 / 4" style="width: 104.25px; margin-left: 10px;">
+                                        <img class="img-responsive m-auto" src="/template/static/images/product-image/14.jpg" alt="">
+                                    </div>
+                                </div>
+                                <span class="swiper-notification" aria-live="assertive" aria-atomic="true"></span>
+                            </div>
+                        </div>
+                        <div class="col-md-7 col-sm-12 col-xs-12">
+                            <div class="product-details-content quickview-content">
+                                <h2>عنوان محصول فروشگاه</h2>
+                                <p class="reference">امکان مرجوعی :<span> وجود دارد</span></p>
+                                <div class="pro-details-rating-wrap">
+                                    <div class="rating-product">
+                                        <i class="ion-android-star"></i>
+                                        <i class="ion-android-star"></i>
+                                        <i class="ion-android-star"></i>
+                                        <i class="ion-android-star"></i>
+                                        <i class="ion-android-star"></i>
+                                    </div>
+                                    <span class="read-review"><a class="reviews" href="#">مشاهده نظرات (1)</a></span>
+                                </div>
+                                <div class="pricing-meta">
+                                    <ul>
+                                        <li class="old-price not-cut">50.000 تومان</li>
+                                    </ul>
+                                </div>
+                                <p class="quickview-para">لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است چاپگرها و متون بلکه روزنامه و مجله که لازم است و برای شرایط فعلی می باشد</p>
+                                <div class="pro-details-size-color">
+                                    <div class="pro-details-color-wrap">
+                                        <span>رنگ</span>
+                                        <div class="pro-details-color-content">
+                                            <ul>
+                                                <li class="blue"></li>
+                                                <li class="maroon active"></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="pro-details-quality">
+                                    <div class="cart-plus-minus">
+                                        <div class="dec qtybutton">-</div>
+                                        <input class="cart-plus-minus-box" type="text" name="qtybutton" value="1">
+                                        <div class="inc qtybutton">+</div>
+                                    </div>
+                                    <div class="pro-details-cart btn-hover">
+                                        <a href="#"> + افزودن به سبد خرید</a>
+                                    </div>
+                                </div>
+                                <div class="pro-details-wish-com">
+                                    <div class="pro-details-wishlist">
+                                        <a href="wishlist.html"><i class="ion-android-favorite-outline"></i>افزودن به لیست علاقه مندی ها</a>
+                                    </div>
+                                    <div class="pro-details-compare">
+                                        <a href="compare.html"><i class="ion-ios-shuffle-strong"></i>مقایسه محصول</a>
+                                    </div>
+                                </div>
+                                <div class="pro-details-social-info">
+                                    <span>اشتراک گذاری :</span>
+                                    <div class="social-info">
+                                        <ul>
+                                            <li>
+                                                <a href="#"><i class="ion-social-facebook"></i></a>
+                                            </li>
+                                            <li>
+                                                <a href="#"><i class="ion-social-twitter"></i></a>
+                                            </li>
+                                            <li>
+                                                <a href="#"><i class="ion-social-google"></i></a>
+                                            </li>
+                                            <li>
+                                                <a href="#"><i class="ion-social-instagram"></i></a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="/template/static/js/vendor/jquery-3.6.0.min.js"></script>
+    <script src="/template/static/js/vendor/bootstrap.bundle.min.js"></script>
+    <script src="/template/static/js/vendor/jquery-migrate-3.3.2.min.js"></script>
+    <script src="/template/static/js/vendor/modernizr-3.11.2.min.js"></script>
+    <script src="/template/static/js/plugins/jquery-ui.min.js"></script>
+    <script src="/template/static/js/plugins/swiper.min.js"></script>
+    <script src="/template/static/js/plugins/countdown.js"></script>
+    <script src="/template/static/js/plugins/scrollup.js"></script>
+    <script src="/template/static/js/plugins/elevateZoom.js"></script>
+    <script src="/template/static/js/vendor/vendor.min.js"></script>
+    <script src="/template/static/js/plugins/plugins.min.js"></script>
+    <script src="/template/static/js/main.js"></script>
+
+
+
+
+    <a id="scrollUp" href="#top" style="position: fixed; z-index: 2147483647; display: none;"><i class="ion-android-arrow-up"></i></a>
+</body><!-- Mirrored from htmldemo.net/rozer/rozer/shop-left-sidebar.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 23 Jan 2023 11:15:12 GMT -->
+</html>

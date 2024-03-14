@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.8.34322.80
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebMarke_App", "WebMarke_App\WebMarke_App.csproj", "{105FF940-13ED-42A6-9669-329357E900AA}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{105FF940-13ED-42A6-9669-329357E900AA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{105FF940-13ED-42A6-9669-329357E900AA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{105FF940-13ED-42A6-9669-329357E900AA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{105FF940-13ED-42A6-9669-329357E900AA}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {D359A64B-516E-4B10-B3E2-363DCD6CA886}
+	EndGlobalSection
+EndGlobal
