@@ -1,0 +1,56 @@
+﻿@model IEnumerable<Category>
+@{
+    ViewData["Title"] = "Index";
+}
+
+<div class="container p-3">
+    <div class="row pt-4">
+        <div class="col-6">
+            <h2 class="text-black">لیست دسته ها</h2>
+        </div>
+        <div class="col-6 text-end">
+            <a asp-controller="category" asp-action="upsert" class="btn btn-outline-dark">ایجاد دسته جدید</a>
+        </div>
+    </div>
+    <br />
+    <table class="table table-striped table-bordered" style="width:100%">
+        <thead>
+            <tr>
+                <th>
+                    نام دسته
+                </th>
+                <th>
+                    والد
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var obj in Model)
+            {
+                <tr>
+                    <td width="50%">
+                        @obj.Name
+                    </td>
+                    <td width="50%">
+                        @obj.ParentId
+                    </td>
+                    <td>
+                        <div class="m-75 btn-group" role="group">
+                            <a asp-controller="category" asp-action="upsert" asp-route-id="@obj.Id">
+                                ویرایش
+                            </a>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="m-75 btn-group" role="group">
+                            <a asp-controller="category" asp-action="delete" asp-route-id="@obj.Id">
+                                حذف
+                            </a>
+                        </div>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+

@@ -64,14 +64,13 @@
                             </div>
                             <div class="contact-link">
                                 <div class="phone tm-ltr">
-                                    <p class="tm-rtl">تلفن ما :</p>
-                                    <a class="tm-ltr" href="tel:02100000000">021 0000 0000</a>
+                                    <a asp-controller="Category" asp-action="upsert">ایجاد دسته بندی</a>
                                 </div>
                             </div>
                             <!--Cart info Start -->
                             <div class="header-tools d-flex">
                                 <div class="cart-info d-flex align-self-center">
-                                    <a asp-controller="Products" asp-action="Create">ایجاد محصول</a>
+                                    <a asp-controller="Products" asp-action="Upsert">ایجاد محصول</a>
                                 </div>
                             </div>
                         </div>
@@ -232,13 +231,6 @@
                                                 <div class="product-decs">
                                                     <a class="inner-link" href="shop-4-column.html"><span>@item.Title</span></a>
                                                     <h2><a href="single-product.html" class="product-link">@item.Description</a></h2>
-                                                    <div class="rating-product">
-                                                        <i class="ion-android-star"></i>
-                                                        <i class="ion-android-star"></i>
-                                                        <i class="ion-android-star"></i>
-                                                        <i class="ion-android-star"></i>
-                                                        <i class="ion-android-star"></i>
-                                                    </div>
                                                     <div class="pricing-meta">
                                                         <ul>
                                                             <li class="old-price not-cut">@item.Price تومان</li>
@@ -247,7 +239,7 @@
                                                 </div>
                                                 <div class="add-to-link">
                                                     <ul>
-                                                        <li class="cart"><a class="cart-btn" asp-controller="products" asp-action="edit" asp-route-id="@item.Id">ویرایش</a></li>
+                                                        <li class="cart"><a class="cart-btn" asp-controller="products" asp-action="upsert" asp-route-id="@item.Id">ویرایش</a></li>
                                                         <li class="cart"><a class="cart-btn" asp-controller="products" asp-action="delete" asp-route-id="@item.Id">حذف</a></li>
                                                     </ul>
                                                 </div>
@@ -277,105 +269,33 @@
                 <div class="col-lg-3 order-lg-first col-md-12 order-md-last mb-md-60px mb-lm-60px">
                     <div class="shop-sidebar-wrap">
                         <div class="sidebar-widget padding-30px bg-light-gray-2 mb-30px">
-                            <h3 class="sidebar-title">لوازم الکترونیکی</h3>
+                            <h3 class="sidebar-title">دسته بندی ها</h3>
                             <div class="accordion" id="accordionExample">
-                                <div class="card">
-                                    <div class="card-header" id="headingOne">
-                                        <a href="#" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne" class="collapsed">دسته شماره یک</a>
-                                    </div>
+                                @* @foreach (var category in Model.CategoryListt)
+                                {
+                                    <div class="card">
+                                        @if (category.ParentId == null)
+                                        {
+                                            <div class="card-header" id="headingOne">
+                                                <span data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne" class="collapsed">@category.Name</span>
+                                            </div>
+                                        }
+                                        @if (category.ParentId != null)
+                                        {
+                                            @foreach ()
+                                            {
+                                                <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
+                                                    <div class="card-body">
+                                                        <ul class="category-list">
+                                                            <li><a>@category.Name</a></li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            }
 
-                                    <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample" style="">
-                                        <div class="card-body">
-                                            <ul class="category-list">
-                                                <li><a href="#">زیر دسته 1</a></li>
-                                                <li><a href="#">زیر دسته 2</a></li>
-                                                <li><a href="#">زیر دسته 3</a></li>
-                                                <li><a href="#">زیر دسته 4</a></li>
-                                                <li><a href="#">زیر دسته 5</a></li>
-                                            </ul>
-                                        </div>
+                                        }
                                     </div>
-                                </div> <!-- card -->
-                                <div class="card">
-                                    <div class="card-header" id="headingTwo">
-                                        <a href="#" class="collapsed" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">دسته شماره دو</a>
-                                    </div>
-                                    <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample" style="">
-                                        <div class="card-body">
-                                            <ul class="category-list">
-                                                <li><a href="#">زیر دسته 1</a></li>
-                                                <li><a href="#">زیر دسته 2</a></li>
-                                                <li><a href="#">زیر دسته 3</a></li>
-                                                <li><a href="#">زیر دسته 4</a></li>
-                                                <li><a href="#">زیر دسته 5</a></li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                </div> <!-- card -->
-                                <div class="card">
-                                    <div class="card-header" id="headingThree">
-                                        <a href="#" class="collapsed" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">دسته شماره سه</a>
-                                    </div>
-                                    <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionExample" style="">
-                                        <div class="card-body">
-                                            <ul class="category-list">
-                                                <li><a href="#">زیر دسته 1</a></li>
-                                                <li><a href="#">زیر دسته 2</a></li>
-                                                <li><a href="#">زیر دسته 3</a></li>
-                                                <li><a href="#">زیر دسته 4</a></li>
-                                                <li><a href="#">زیر دسته 5</a></li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                </div> <!-- card -->
-                                <div class="card">
-                                    <div class="card-header" id="headingFour">
-                                        <a href="#" class="collapsed" data-bs-toggle="collapse" data-bs-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">دسته شماره چهار</a>
-                                    </div>
-                                    <div id="collapseFour" class="collapse" aria-labelledby="headingFour" data-parent="#accordionExample">
-                                        <div class="card-body">
-                                            <ul class="category-list">
-                                                <li><a href="#">زیر دسته 1</a></li>
-                                                <li><a href="#">زیر دسته 2</a></li>
-                                                <li><a href="#">زیر دسته 3</a></li>
-                                                <li><a href="#">زیر دسته 4</a></li>
-                                                <li><a href="#">زیر دسته 5</a></li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                </div> <!-- card -->
-                                <div class="card">
-                                    <div class="card-header" id="headingFive">
-                                        <a href="#" class="collapsed" data-bs-toggle="collapse" data-bs-target="#collapseFive" aria-expanded="false" aria-controls="collapseFive">دسته شماره پنج</a>
-                                    </div>
-                                    <div id="collapseFive" class="collapse" aria-labelledby="headingFive" data-parent="#accordionExample">
-                                        <div class="card-body">
-                                            <ul class="category-list">
-                                                <li><a href="#">زیر دسته 1</a></li>
-                                                <li><a href="#">زیر دسته 2</a></li>
-                                                <li><a href="#">زیر دسته 3</a></li>
-                                                <li><a href="#">زیر دسته 4</a></li>
-                                                <li><a href="#">زیر دسته 5</a></li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                </div> <!-- card -->
-                                <div class="card">
-                                    <div class="card-header" id="headingSix">
-                                        <a href="#" class="collapsed" data-bs-toggle="collapse" data-bs-target="#collapseSix" aria-expanded="false" aria-controls="collapseSix">دسته شماره شش</a>
-                                    </div>
-                                    <div id="collapseSix" class="collapse" aria-labelledby="headingSix" data-parent="#accordionExample">
-                                        <div class="card-body">
-                                            <ul class="category-list">
-                                                <li><a href="#">زیر دسته 1</a></li>
-                                                <li><a href="#">زیر دسته 2</a></li>
-                                                <li><a href="#">زیر دسته 3</a></li>
-                                                <li><a href="#">زیر دسته 4</a></li>
-                                                <li><a href="#">زیر دسته 5</a></li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                </div> <!-- card -->
+                                } *@
                             </div>
                         </div>
                         <!-- Sidebar single item -->
@@ -391,90 +311,7 @@
                                     <button type="submit" class="btn-dark btn">Filter</button>
                                 </form>
                             </div>
-                            <!-- Sidebar single item -->
-                            <div class="sidebar-widget mt-30">
-                                <h4 class="pro-sidebar-title">اندازه</h4>
-                                <div class="sidebar-widget-list">
-                                    <ul>
-                                        <li>
-                                            <div class="sidebar-widget-list-left">
-                                                <input type="checkbox"> <a href="#">اندازه 1<span>(4)</span> </a>
-                                                <span class="checkmark"></span>
-                                            </div>
-                                        </li>
-                                        <li>
-                                            <div class="sidebar-widget-list-left">
-                                                <input type="checkbox" value=""> <a href="#">اندازه 2<span>(4)</span></a>
-                                                <span class="checkmark"></span>
-                                            </div>
-                                        </li>
-                                        <li>
-                                            <div class="sidebar-widget-list-left">
-                                                <input type="checkbox" value=""> <a href="#">اندازه 3<span>(4)</span> </a>
-                                                <span class="checkmark"></span>
-                                            </div>
-                                        </li>
-                                        <li>
-                                            <div class="sidebar-widget-list-left">
-                                                <input type="checkbox" value=""> <a href="#">اندازه 4<span>(4)</span> </a>
-                                                <span class="checkmark"></span>
-                                            </div>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <!-- Sidebar single item -->
-                            <div class="sidebar-widget no-cba mt-20">
-                                <h4 class="pro-sidebar-title">رنگ</h4>
-                                <div class="sidebar-widget-list">
-                                    <ul>
-                                        <li>
-                                            <div class="sidebar-widget-list-left">
-                                                <input type="checkbox"> <a href="#">خاکستری<span>(2)</span> </a>
-                                                <span class="checkmark grey"></span>
-                                            </div>
-                                        </li>
-                                        <li>
-                                            <div class="sidebar-widget-list-left">
-                                                <input type="checkbox" value=""> <a href="#">سفید<span>(4)</span></a>
-                                                <span class="checkmark white"></span>
-                                            </div>
-                                        </li>
-                                        <li>
-                                            <div class="sidebar-widget-list-left">
-                                                <input type="checkbox" value=""> <a href="#">سیاه<span>(4)</span> </a>
-                                                <span class="checkmark black"></span>
-                                            </div>
-                                        </li>
-                                        <li>
-                                            <div class="sidebar-widget-list-left">
-                                                <input type="checkbox" value=""> <a href="#">شتری<span>(4)</span> </a>
-                                                <span class="checkmark brown"></span>
-                                            </div>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <!-- Sidebar single item -->
-                            <div class="sidebar-widget mt-30">
-                                <h4 class="pro-sidebar-title">نام تجاری</h4>
-                                <div class="sidebar-widget-list">
-                                    <ul>
-                                        <li>
-                                            <div class="sidebar-widget-list-left">
-                                                <input type="checkbox"> <a href="#">عنوان شماره یک<span>(10)</span> </a>
-                                                <span class="checkmark"></span>
-                                            </div>
-                                        </li>
-                                        <li>
-                                            <div class="sidebar-widget-list-left">
-                                                <input type="checkbox" value=""> <a href="#">عنوان شماره دو<span>(7)</span></a>
-                                                <span class="checkmark"></span>
-                                            </div>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
+                            
                         </div>
                         <!-- Sidebar single item -->
                     </div>

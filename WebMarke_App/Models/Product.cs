@@ -25,19 +25,18 @@ namespace WebMarke_App.Models
 
         [Required(ErrorMessage = "رنگ اجباریست")]
         [DisplayName("رنگ")]
-        public string Cooler { get; set; }
+        public string Color { get; set; }
 
         [Required]
         [DisplayName("عکس")]
         [ValidateNever]
         public string Img { get; set; }
 
-        //[Required(ErrorMessage = "دسته اجباریست")]
-        //[DisplayName("دسته")]
-        //public int CategoryId { get; set; }
+        [DisplayName("دسته")]
+        public int? CategoryId { get; set; }
 
-        //[ForeignKey(nameof(CategoryId))]
-        //[ValidateNever]
-        //public Category? Category { get; set; }
+        [ForeignKey(nameof(CategoryId))]
+        [ValidateNever]
+        public Category? Category { get; set; }
     }
 }

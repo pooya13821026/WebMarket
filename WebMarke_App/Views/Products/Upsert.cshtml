@@ -29,22 +29,22 @@
                     <span asp-validation-for="Product.Price" class="text-danger"></span>
                 </div>
                 <div class="col-6 mb-3">
-                    <label asp-for="Product.Cooler"></label>
-                    <input asp-for="Product.Cooler" class="form-control" />
-                    <span asp-validation-for="Product.Cooler" class="text-danger"></span>
+                    <label asp-for="Product.Color"></label>
+                    <input asp-for="Product.Color" class="form-control" />
+                    <span asp-validation-for="Product.Color" class="text-danger"></span>
                 </div>
             </div>
             <div class="mb-3">
                 <label asp-for="Product.Img"></label>
                 <input type="file" name="file" class="form-control" />
             </div>
-            @* <div class="mb-3">
+            <div class="mb-3">
                 <label asp-for="Product.CategoryId"></label>
                 <select asp-for="Product.CategoryId" asp-items="@Model.CategoryList" class="form-select">
                     <option disabled selected>---انتخاب دسته---</option>
                 </select>
                 <span asp-validation-for="Product.CategoryId" class="text-danger"></span>
-            </div> *@
+            </div>
             <div class="col-12">
                 @if (Model.Product.Id != 0)
                 {

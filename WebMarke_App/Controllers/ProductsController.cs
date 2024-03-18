@@ -18,9 +18,14 @@ namespace WebMarke_App.Controllers
             _WebHostEnviroment = webHostEnvironment;
         }
 
-        public IActionResult Index(string searche)
+        public IActionResult Index(int? id,string searche)
         {
             var products = from product in _db.Products select product;
+            if (id.HasValue)
+            {
+                var idd = id.Value;
+                products = products.Where(x => x.Id == idd);
+            }
             if (!String.IsNullOrEmpty(searche))
             {
                 products = products.Where(p => p.Title.Contains(searche));
@@ -39,85 +44,30 @@ namespace WebMarke_App.Controllers
 
 
 
-        //public IActionResult Upsert(int? id)
-        //{
-        //    ProductVM productVM = new()
-        //    {
-        //        Product = new(),
-        //        CategoryList = _db.Categories.Select(i => new SelectListItem
-        //        {
-        //            Text = i.Name,
-        //            Value = i.Id.ToString(),
-        //        }).ToList(),
-        //    };
-        //    if (id == null || id == 0)
-        //    {
-        //        return View(productVM);
-        //    }
-        //    else
-        //    {
-        //        productVM.Product = _db.Products.FirstOrDefault(u => u.Id == id);
-        //        return View(productVM);
-        //    }
-        //    return View(productVM);
-        //}
-
-        //[HttpPost]
-        //public IActionResult Upsert(ProductVM obj, IFormFile? file)
-        //{
-        //    string wwwrootPath = _WebHostEnviroment.WebRootPath;
-        //    if (ModelState.IsValid)
-        //    {
-        //        if (file != null)
-        //        {
-        //            string FileName = Guid.NewGuid().ToString();
-        //            var uploads = Path.Combine(wwwrootPath, @"img");
-        //            var extention = Path.GetExtension(file.FileName);
-
-        //            if (obj.Product.Img != null)
-        //            {
-        //                var oldImgPath = Path.Combine(wwwrootPath, obj.Product.Img.TrimStart('\\'));
-        //                if (System.IO.File.Exists(oldImgPath))
-        //                {
-        //                    System.IO.File.Delete(oldImgPath);
-        //                }
-        //            }
-        //            using (var FileStream = new FileStream(Path.Combine(uploads, FileName + extention), FileMode.Create))
-        //            {
-        //                file.CopyTo(FileStream);
-        //            }
-        //            obj.Product.Img = @"img/" + FileName + extention;
-        //        }
-        //        if (obj.Product.Id == 0)
-        //        {
-        //            _db.Products.Add(obj.Product);
-        //            _db.SaveChanges();
-        //            return RedirectToAction("index");
-        //        }
-        //        else
-        //        {
-        //            _db.Products.Update(obj.Product);
-        //            _db.SaveChanges();
-        //            return RedirectToAction("index");
-        //        }
-        //    }
-        //    return View(obj);
-        //}
-
-
-
-
-
-
-
-        [HttpGet]
-        public IActionResult Create()
+        public IActionResult Upsert(int? id)
         {
-            return View();
+            ProductVM productVM = new()
+            {
+                Product = new(),
+                CategoryList = _db.Categories.Select(i => new SelectListItem
+                {
+                    Text = i.Name,
+                    Value = i.Id.ToString(),
+                }).ToList(),
+            };
+            if (id == null || id == 0)
+            {
+                return View(productVM);
+            }
+            else
+            {
+                productVM.Product = _db.Products.FirstOrDefault(u => u.Id == id);
+                return View(productVM);
+            }
         }
 
         [HttpPost]
-        public IActionResult Create(Product obj, IFormFile? file)
+        public IActionResult Upsert(ProductVM obj, IFormFile? file)
         {
             string wwwrootPath = _WebHostEnviroment.WebRootPath;
             if (ModelState.IsValid)
@@ -127,51 +77,108 @@ namespace WebMarke_App.Controllers
                     string FileName = Guid.NewGuid().ToString();
                     var uploads = Path.Combine(wwwrootPath, @"img");
                     var extention = Path.GetExtension(file.FileName);
-                    //if (obj.Img != null)
-                    //{
-                    //    var oldImgPath = Path.Combine(wwwrootPath, obj.Img.TrimStart('\\'));
-                    //    if (System.IO.File.Exists(oldImgPath))
-                    //    {
-                    //        System.IO.File.Delete(oldImgPath);
-                    //    }
-                    //}
+
+                    if (obj.Product.Img != null)
+                    {
+                        var oldImgPath = Path.Combine(wwwrootPath, obj.Product.Img.TrimStart('\\'));
+                        if (System.IO.File.Exists(oldImgPath))
+                        {
+                            System.IO.File.Delete(oldImgPath);
+                        }
+                    }
                     using (var FileStream = new FileStream(Path.Combine(uploads, FileName + extention), FileMode.Create))
                     {
                         file.CopyTo(FileStream);
                     }
-                    obj.Img = @"img/" + FileName + extention;
+                    obj.Product.Img = @"img/" + FileName + extention;
                 }
-                _db.Add(obj);
-                _db.SaveChanges();
-                return RedirectToAction("index");
+                if (obj.Product.Id == 0)
+                {
+                    _db.Products.Add(obj.Product);
+                    _db.SaveChanges();
+                    return RedirectToAction("index");
+                }
+                else
+                {
+                    _db.Products.Update(obj.Product);
+                    _db.SaveChanges();
+                    return RedirectToAction("index");
+                }
             }
             return View(obj);
         }
-        [HttpGet]
-        public IActionResult Edit(int? id)
-        {
-            if (id == null || id == 0)
-            {
-                return NotFound();
-            }
-            var ProductDbFirst = _db.Products.FirstOrDefault(i => i.Id == id);
-            if (ProductDbFirst == null)
-            {
-                return NotFound();
-            }
-            return View(ProductDbFirst);
-        }
-        [HttpPost]
-        public IActionResult Edit(Product obj)
-        {
-            if (ModelState.IsValid)
-            {
-                _db.Products.Update(obj);
-                _db.SaveChanges();
-                return RedirectToAction("index");
-            }
-            return View(obj);
-        }
+
+
+
+
+
+
+
+        //[HttpGet]
+        //public IActionResult Create()
+        //{
+        //    return View();
+        //}
+
+        //[HttpPost]
+        //public IActionResult Create(Product obj, IFormFile? file)
+        //{
+        //    string wwwrootPath = _WebHostEnviroment.WebRootPath;
+        //    if (ModelState.IsValid)
+        //    {
+        //        if (file != null)
+        //        {
+        //            string FileName = Guid.NewGuid().ToString();
+        //            var uploads = Path.Combine(wwwrootPath, @"img");
+        //            var extention = Path.GetExtension(file.FileName);
+        //            if (obj.Img != null)
+        //            {
+        //                var oldImgPath = Path.Combine(wwwrootPath, obj.Img.TrimStart('\\'));
+        //                if (System.IO.File.Exists(oldImgPath))
+        //                {
+        //                    System.IO.File.Delete(oldImgPath);
+        //                }
+        //            }
+        //            using (var FileStream = new FileStream(Path.Combine(uploads, FileName + extention), FileMode.Create))
+        //            {
+        //                file.CopyTo(FileStream);
+        //            }
+        //            obj.Img = @"img/" + FileName + extention;
+        //        }
+        //        _db.Add(obj);
+        //        _db.SaveChanges();
+        //        return RedirectToAction("index");
+        //    }
+        //    return View(obj);
+        //}
+        //[HttpGet]
+        //public IActionResult Edit(int? id)
+        //{
+        //    if (id == null || id == 0)
+        //    {
+        //        return NotFound();
+        //    }
+        //    var ProductDbFirst = _db.Products.FirstOrDefault(i => i.Id == id);
+        //    if (ProductDbFirst == null)
+        //    {
+        //        return NotFound();
+        //    }
+        //    return View(ProductDbFirst);
+        //}
+        //[HttpPost]
+        //public IActionResult Edit(Product obj)
+        //{
+        //    if (ModelState.IsValid)
+        //    {
+        //        _db.Products.Update(obj);
+        //        _db.SaveChanges();
+        //        return RedirectToAction("index");
+        //    }
+        //    return View(obj);
+        //}
+
+
+
         [HttpGet]
         public IActionResult Delete(int? id)
         {
