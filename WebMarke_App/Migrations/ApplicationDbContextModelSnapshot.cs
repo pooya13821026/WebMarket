@@ -41,7 +41,7 @@ namespace WebMarke_App.Migrations
 
                     b.HasIndex("ParentId");
 
-                    b.ToTable("Categories");
+                    b.ToTable("Categories", (string)null);
                 });
 
             modelBuilder.Entity("WebMarke_App.Models.Field", b =>
@@ -63,7 +63,7 @@ namespace WebMarke_App.Migrations
 
                     b.HasIndex("CategoryId");
 
-                    b.ToTable("Fields");
+                    b.ToTable("Fields", (string)null);
                 });
 
             modelBuilder.Entity("WebMarke_App.Models.FildeValue", b =>
@@ -90,7 +90,7 @@ namespace WebMarke_App.Migrations
 
                     b.HasIndex("ProductId");
 
-                    b.ToTable("Values");
+                    b.ToTable("Values", (string)null);
                 });
 
             modelBuilder.Entity("WebMarke_App.Models.Product", b =>
@@ -128,7 +128,7 @@ namespace WebMarke_App.Migrations
 
                     b.HasIndex("CategoryId");
 
-                    b.ToTable("Products");
+                    b.ToTable("Products", (string)null);
                 });
 
             modelBuilder.Entity("WebMarke_App.Models.Category", b =>

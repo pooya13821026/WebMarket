@@ -1,0 +1,39 @@
+﻿@using WebMarke_App.Models.ViewModel
+@model ProductVM
+@{
+    ViewData["Title"] = "Upsert";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<form method="post">
+    <input asp-for="Field.Id" type="hidden" />
+    <div class="border p-3 mt-4">
+        <div class="row pb-2">
+            <h2>@(Model.Field.Id != 0 ? "ویرایش" : "ایجاد") فیلد</h2>
+            <hr />
+            <div class="mb-3">
+                <label asp-for="Field.Filde"></label>
+                <input asp-for="Field.Filde" class="form-control" />
+                <span asp-validation-for="Field.Filde" class="text-danger"></span>
+            </div>
+            <div class="mb-3">
+                <label asp-for="Field.CategoryId"></label>
+                <select asp-for="Field.CategoryId" asp-items="@Model.CategoryList" class="form-select">
+                    <option disabled selected>---انتخاب والد---</option>
+                </select>
+                <span asp-validation-for="Field.CategoryId" class="text-danger"></span>
+            </div>
+            <div class="col-12">
+                @if (Model.Field.Id != 0)
+                {
+                    <button type="submit" class="btn btn-outline-dark m-auto" style="width:150px">ویرایش فیلد</button>
+                }
+                else
+                {
+                    <button type="submit" class="btn btn-outline-dark m-auto" style="width:150px">ایجاد فیلد</button>
+                }
+                <a asp-controller="field" asp-action="Index" class="btn btn-outline-dark m-auto" style="width:150px">بازگشت به لیست</a>
+            </div>
+        </div>
+    </div>
+</form>

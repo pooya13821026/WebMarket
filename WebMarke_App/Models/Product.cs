@@ -33,6 +33,7 @@ namespace WebMarke_App.Models
         public string Img { get; set; }
 
         [DisplayName("دسته")]
+        [ValidateNever]
         public int? CategoryId { get; set; }
 
         [ForeignKey(nameof(CategoryId))]
