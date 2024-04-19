@@ -16,5 +16,6 @@ namespace WebMarke_App.Models.ViewModel
         public Category? Category { get; set; }
         public Field? Field { get; set; }
         public FildeValue? Value { get; set; }
+        
     }
 }
