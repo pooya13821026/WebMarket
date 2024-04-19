@@ -6,15 +6,15 @@
 }
 
 <form method="post" asp-action="Upsert" enctype="multipart/form-data">
-    <input asp-for="Product.Id" type="hidden" />
-    <input asp-for="Product.Img" type="hidden" />
+    <input asp-for="Product.Id" type="hidden"/>
+    <input asp-for="Product.Img" type="hidden"/>
     <div class="border p-3 mt-4">
         <div class="row pb-2">
             <h2>@(Model.Product.Id != 0 ? "ویرایش" : "ایجاد") محصول</h2>
-            <hr />
+            <hr/>
             <div class="mb-3">
                 <label asp-for="Product.Title"></label>
-                <input asp-for="Product.Title" class="form-control" />
+                <input asp-for="Product.Title" class="form-control"/>
                 <span asp-validation-for="Product.Title" class="text-danger"></span>
             </div>
             <div class="mb-3">
@@ -25,18 +25,29 @@
             <div class="row">
                 <div class="col-6 mb-3">
                     <label asp-for="Product.Price"></label>
-                    <input asp-for="Product.Price" class="form-control" />
+                    <input asp-for="Product.Price" class="form-control"/>
                     <span asp-validation-for="Product.Price" class="text-danger"></span>
                 </div>
                 <div class="col-6 mb-3">
                     <label asp-for="Product.Color"></label>
-                    <input asp-for="Product.Color" class="form-control" />
+                    <input asp-for="Product.Color" class="form-control"/>
                     <span asp-validation-for="Product.Color" class="text-danger"></span>
                 </div>
             </div>
             <div class="mb-3">
-                <label asp-for="Product.Img"></label>
-                <input type="file" name="file" class="form-control" />
+                <label asp-for="Product!.File"></label>
+                <br>
+                @if (Model.Product.Img is not null)
+                {
+                    <img id="selected_image" style="width: 100px; height: 100px" src="/@Model.Product.Img"
+                         alt="@Model.Product.Title">
+                    <input id="select_image" style="display: none" asp-for="Product!.File" class="form-control"/>
+                }
+                else
+                {
+                    <input asp-for="Product!.File" class="form-control"/>
+                    <span asp-validation-for="Product!.File" class="text-danger"></span>
+                }
             </div>
             <div class="mb-3">
                 <label asp-for="Product.CategoryId"></label>
@@ -54,8 +65,24 @@
                 {
                     <button type="submit" class="btn btn-outline-dark m-auto" style="width:150px">ایجاد محصول</button>
                 }
-                <a asp-controller="product" asp-action="Index" class="btn btn-outline-dark m-auto" style="width:150px">بازگشت به لیست</a>
+                <a asp-controller="Products" asp-action="Index" class="btn btn-outline-dark m-auto" style="width:150px">
+                    بازگشت
+                    به لیست
+                </a>
             </div>
         </div>
     </div>
 </form>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+<script>
+    $("#selected_image").on("click", function () {
+    $("input#select_image").trigger("click")
+    })
+    $("input#select_image").on("change", () => {
+    $("#selected_image").attr("src", URL.createObjectURL($("input#select_image")[0].files[0]))
+
+        
+    });
+</script>

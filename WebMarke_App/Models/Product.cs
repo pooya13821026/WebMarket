@@ -39,5 +39,10 @@ namespace WebMarke_App.Models
         [ForeignKey(nameof(CategoryId))]
         [ValidateNever]
         public Category? Category { get; set; }
+        
+        [Required(ErrorMessage = "تصویر اجباریست")]
+        [DisplayName("تصویر")]
+        [NotMapped]
+        public IFormFile File { get; set; }
     }
 }

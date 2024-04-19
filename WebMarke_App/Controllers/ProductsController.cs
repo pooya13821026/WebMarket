@@ -1,4 +1,5 @@
-﻿using Humanizer;
+﻿using System.Diagnostics;
+using Humanizer;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -12,13 +13,14 @@ namespace WebMarke_App.Controllers
     {
         private readonly ApplicationDbContext _db;
         private readonly IWebHostEnvironment _WebHostEnviroment;
+
         public ProductsController(ApplicationDbContext db, IWebHostEnvironment webHostEnvironment)
         {
             _db = db;
             _WebHostEnviroment = webHostEnvironment;
         }
 
-        public IActionResult Index(int? id,string searche)
+        public IActionResult Index(int? id, string searche)
         {
             var products = from product in _db.Products select product;
             if (id.HasValue)
@@ -26,22 +28,26 @@ namespace WebMarke_App.Controllers
                 var idd = id.Value;
                 products = products.Where(x => x.Id == idd);
             }
+
             if (!String.IsNullOrEmpty(searche))
             {
                 products = products.Where(p => p.Title.Contains(searche));
             }
+
             return View(products.ToList());
         }
 
         [HttpPost]
         public IActionResult Index(double min, double max)
         {
+            if (max == 0)
+            {
+                max = _db.Products.Max(product => product.Price);
+            }
             var filterPrice = from product in _db.Products select product;
             filterPrice = _db.Products.Where(f => f.Price >= min && f.Price <= max);
             return View(filterPrice);
         }
-
-
 
 
         public IActionResult Upsert(int? id)
@@ -67,16 +73,16 @@ namespace WebMarke_App.Controllers
         }
 
         [HttpPost]
-        public IActionResult Upsert(ProductVM obj, IFormFile? file)
+        public IActionResult Upsert(ProductVM obj)
         {
             string wwwrootPath = _WebHostEnviroment.WebRootPath;
             if (ModelState.IsValid)
             {
-                if (file != null)
+                if (obj.Product.File != null)
                 {
                     string FileName = Guid.NewGuid().ToString();
                     var uploads = Path.Combine(wwwrootPath, @"img");
-                    var extention = Path.GetExtension(file.FileName);
+                    var extention = Path.GetExtension(obj.Product.File.FileName);
 
                     if (obj.Product.Img != null)
                     {
@@ -86,12 +92,16 @@ namespace WebMarke_App.Controllers
                             System.IO.File.Delete(oldImgPath);
                         }
                     }
-                    using (var FileStream = new FileStream(Path.Combine(uploads, FileName + extention), FileMode.Create))
+
+                    using (var FileStream =
+                           new FileStream(Path.Combine(uploads, FileName + extention), FileMode.Create))
                     {
-                        file.CopyTo(FileStream);
+                        obj.Product.File.CopyTo(FileStream);
                     }
+
                     obj.Product.Img = @"img/" + FileName + extention;
                 }
+
                 if (obj.Product.Id == 0)
                 {
                     _db.Products.Add(obj.Product);
@@ -105,13 +115,9 @@ namespace WebMarke_App.Controllers
                     return RedirectToAction("index");
                 }
             }
+
             return View(obj);
         }
-
-
-
-
-
 
 
         //[HttpGet]
@@ -178,7 +184,6 @@ namespace WebMarke_App.Controllers
         //}
 
 
-
         [HttpGet]
         public IActionResult Delete(int? id)
         {
@@ -186,13 +191,16 @@ namespace WebMarke_App.Controllers
             {
                 return NotFound();
             }
+
             var ProductDbFirst = _db.Products.FirstOrDefault(i => i.Id == id);
             if (ProductDbFirst == null)
             {
                 return NotFound();
             }
+
             return View(ProductDbFirst);
         }
+
         [HttpPost]
         public IActionResult DeletePost(int? id)
         {

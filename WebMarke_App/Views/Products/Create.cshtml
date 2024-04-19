@@ -8,10 +8,10 @@
     <div class="border p-3 mt-4">
         <div class="row pb-2">
             <h2>ایجاد محصول</h2>
-            <hr />
+            <hr/>
             <div class="mb-3">
                 <label asp-for="Title"></label>
-                <input asp-for="Title" class="form-control" />
+                <input asp-for="Title" class="form-control"/>
                 <span asp-validation-for="Title" class="text-danger"></span>
             </div>
             <div class="mb-3">
@@ -22,18 +22,19 @@
             <div class="row">
                 <div class="col-6 mb-3">
                     <label asp-for="Price"></label>
-                    <input asp-for="Price" class="form-control" />
+                    <input asp-for="Price" class="form-control"/>
                     <span asp-validation-for="Price" class="text-danger"></span>
                 </div>
                 <div class="col-6 mb-3">
                     <label asp-for="Color"></label>
-                    <input asp-for="Color" class="form-control" />
+                    <input asp-for="Color" class="form-control"/>
                     <span asp-validation-for="Color" class="text-danger"></span>
                 </div>
             </div>
             <div class="mb-3">
-                <label asp-for="Img"></label>
-                <input type="file" name="file" class="form-control" />
+                <label asp-for="File"></label>
+                <input asp-for="File" class="form-control"/>
+                <span asp-validation-for="File" class="text-danger"></span>
             </div>
             <div class="col-12">
                 <button type="submit" class="btn btn-outline-dark m-auto" style="width:150px">ایجاد محصول</button>
