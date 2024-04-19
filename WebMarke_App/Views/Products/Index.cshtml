@@ -271,15 +271,12 @@
                         <div class="sidebar-widget padding-30px bg-light-gray-2 mb-30px">
                             <h3 class="sidebar-title">دسته بندی ها</h3>
                             <div class="accordion" id="accordionExample">
-                                @* @foreach (var category in Model.CategoryListt)
+                                @* @foreach (var category in Model)
                                 {
                                     <div class="card">
-                                        @if (category.ParentId == null)
-                                        {
-                                            <div class="card-header" id="headingOne">
+                                        <div class="card-header" id="headingOne">
                                                 <span data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne" class="collapsed">@category.Name</span>
-                                            </div>
-                                        }
+                                        </div>
                                         @if (category.ParentId != null)
                                         {
                                             @foreach ()
