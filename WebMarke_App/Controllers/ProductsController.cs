@@ -1,6 +1,4 @@
-﻿using Humanizer;
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using WebMarke_App.Data;
 using WebMarke_App.Models;
@@ -12,41 +10,56 @@ namespace WebMarke_App.Controllers
     {
         private readonly ApplicationDbContext _db;
         private readonly IWebHostEnvironment _WebHostEnviroment;
+
         public ProductsController(ApplicationDbContext db, IWebHostEnvironment webHostEnvironment)
         {
             _db = db;
             _WebHostEnviroment = webHostEnvironment;
         }
 
-        public IActionResult Index(int? id,string searche)
+
+        public IActionResult Index(double min, double max, int? id, string? searche, int? categoryId)
         {
-            var products = from product in _db.Products select product;
-            if (id.HasValue)
+            //var products = from product in _db.Products select product;
+            //if (id.HasValue)
+            //{
+            //    var idd = id.Value;
+            //    products = products.Where(x => x.Id == idd);
+            //}
+
+            //if (!String.IsNullOrEmpty(searche))
+            //{
+            //    products = products.Where(p => p.Title.Contains(searche));
+            //}
+
+            //if (max == 0)
+            //{
+            //    max = _db.Products.Max(product => product.Price);
+            //}
+            //var filterPrice = from product in _db.Products select product;
+            //filterPrice = _db.Products.Where(f => f.Price >= min && f.Price <= max);
+
+            if (categoryId == null)
             {
-                var idd = id.Value;
-                products = products.Where(x => x.Id == idd);
+                ProductShowcase products = new()
+                {
+                    Categoryy = _db.Categories.ToList(),
+                    ProductList = _db.Products.ToList()
+                };
+                return View(products);
             }
-            if (!String.IsNullOrEmpty(searche))
+            ProductShowcase filter = new()
             {
-                products = products.Where(p => p.Title.Contains(searche));
-            }
-            return View(products.ToList());
+                Categoryy = _db.Categories.ToList(),
+                ProductList = _db.Products.Where(i => i.Id == categoryId).ToList()
+            };
+            return View(filter);
         }
-
-        [HttpPost]
-        public IActionResult Index(double min, double max)
-        {
-            var filterPrice = from product in _db.Products select product;
-            filterPrice = _db.Products.Where(f => f.Price >= min && f.Price <= max);
-            return View(filterPrice);
-        }
-
-
 
 
         public IActionResult Upsert(int? id)
         {
-            ProductVM productVM = new()
+            ProductShowcase product = new()
             {
                 Product = new(),
                 CategoryList = _db.Categories.Select(i => new SelectListItem
@@ -57,26 +70,26 @@ namespace WebMarke_App.Controllers
             };
             if (id == null || id == 0)
             {
-                return View(productVM);
+                return View(product);
             }
             else
             {
-                productVM.Product = _db.Products.FirstOrDefault(u => u.Id == id);
-                return View(productVM);
+                product.Product = _db.Products.FirstOrDefault(u => u.Id == id);
+                return View(product);
             }
         }
 
         [HttpPost]
-        public IActionResult Upsert(ProductVM obj, IFormFile? file)
+        public IActionResult Upsert(ProductShowcase obj)
         {
             string wwwrootPath = _WebHostEnviroment.WebRootPath;
             if (ModelState.IsValid)
             {
-                if (file != null)
+                if (obj.Product.File != null)
                 {
                     string FileName = Guid.NewGuid().ToString();
                     var uploads = Path.Combine(wwwrootPath, @"img");
-                    var extention = Path.GetExtension(file.FileName);
+                    var extention = Path.GetExtension(obj.Product.File.FileName);
 
                     if (obj.Product.Img != null)
                     {
@@ -86,12 +99,16 @@ namespace WebMarke_App.Controllers
                             System.IO.File.Delete(oldImgPath);
                         }
                     }
-                    using (var FileStream = new FileStream(Path.Combine(uploads, FileName + extention), FileMode.Create))
+
+                    using (var FileStream =
+                           new FileStream(Path.Combine(uploads, FileName + extention), FileMode.Create))
                     {
-                        file.CopyTo(FileStream);
+                        obj.Product.File.CopyTo(FileStream);
                     }
+
                     obj.Product.Img = @"img/" + FileName + extention;
                 }
+
                 if (obj.Product.Id == 0)
                 {
                     _db.Products.Add(obj.Product);
@@ -105,77 +122,9 @@ namespace WebMarke_App.Controllers
                     return RedirectToAction("index");
                 }
             }
+
             return View(obj);
         }
-
-
-
-
-
-
-
-        //[HttpGet]
-        //public IActionResult Create()
-        //{
-        //    return View();
-        //}
-
-        //[HttpPost]
-        //public IActionResult Create(Product obj, IFormFile? file)
-        //{
-        //    string wwwrootPath = _WebHostEnviroment.WebRootPath;
-        //    if (ModelState.IsValid)
-        //    {
-        //        if (file != null)
-        //        {
-        //            string FileName = Guid.NewGuid().ToString();
-        //            var uploads = Path.Combine(wwwrootPath, @"img");
-        //            var extention = Path.GetExtension(file.FileName);
-        //            if (obj.Img != null)
-        //            {
-        //                var oldImgPath = Path.Combine(wwwrootPath, obj.Img.TrimStart('\\'));
-        //                if (System.IO.File.Exists(oldImgPath))
-        //                {
-        //                    System.IO.File.Delete(oldImgPath);
-        //                }
-        //            }
-        //            using (var FileStream = new FileStream(Path.Combine(uploads, FileName + extention), FileMode.Create))
-        //            {
-        //                file.CopyTo(FileStream);
-        //            }
-        //            obj.Img = @"img/" + FileName + extention;
-        //        }
-        //        _db.Add(obj);
-        //        _db.SaveChanges();
-        //        return RedirectToAction("index");
-        //    }
-        //    return View(obj);
-        //}
-        //[HttpGet]
-        //public IActionResult Edit(int? id)
-        //{
-        //    if (id == null || id == 0)
-        //    {
-        //        return NotFound();
-        //    }
-        //    var ProductDbFirst = _db.Products.FirstOrDefault(i => i.Id == id);
-        //    if (ProductDbFirst == null)
-        //    {
-        //        return NotFound();
-        //    }
-        //    return View(ProductDbFirst);
-        //}
-        //[HttpPost]
-        //public IActionResult Edit(Product obj)
-        //{
-        //    if (ModelState.IsValid)
-        //    {
-        //        _db.Products.Update(obj);
-        //        _db.SaveChanges();
-        //        return RedirectToAction("index");
-        //    }
-        //    return View(obj);
-        //}
 
 
 
@@ -186,13 +135,16 @@ namespace WebMarke_App.Controllers
             {
                 return NotFound();
             }
+
             var ProductDbFirst = _db.Products.FirstOrDefault(i => i.Id == id);
             if (ProductDbFirst == null)
             {
                 return NotFound();
             }
+
             return View(ProductDbFirst);
         }
+
         [HttpPost]
         public IActionResult DeletePost(int? id)
         {

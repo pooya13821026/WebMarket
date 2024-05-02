@@ -1,5 +1,30 @@
 using Microsoft.EntityFrameworkCore;
 using WebMarke_App.Data;
+using WebMarke_App.Models.ViewModel;
+
+
+//var c = new FibSeries().Take(10_00000).ToList();
+//foreach (var item in c)
+//{
+//    if(item > 1000)
+//    {
+//        break;
+//    }
+
+//    Console.WriteLine(item);
+//}
+
+//foreach (var item in c)
+//{
+//    if (item > 1000)
+//    {
+//        break;
+//    }
+
+//    Console.WriteLine(item);
+//}
+
+
 
 var builder = WebApplication.CreateBuilder(args);
 

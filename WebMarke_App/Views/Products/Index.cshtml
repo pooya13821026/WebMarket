@@ -1,4 +1,6 @@
-﻿@model IEnumerable<Product>
+﻿@using WebMarke_App.Models.ViewModel
+@model ProductShowcase
+
 @{
     ViewData["Title"] = "Index";
 }
@@ -50,12 +52,6 @@
                                             <option value="0">دسته بندی ها</option>
                                             <option value="12">لپ تاپ</option>
                                             <option value="104">کنسول بازی</option>
-                                            <option value="105">پخش کننده موسیقی</option>
-                                            <option value="106">تلویزیون</option>
-                                            <option value="107">ساعت</option>
-                                            <option value="108">لوازم جانبی</option>
-                                            <option value="109">دوربین</option>
-                                            <option value="110">لوازم خانه</option>
                                         </select>
                                     </div>
                                     <input type="search" name="searche" placeholder="جستجو ... ">
@@ -219,7 +215,7 @@
                             <!-- Tab One Start -->
                             <div id="shop-1" class="tab-pane active">
                                 <div class="row responsive-md-class responsive-xl-class responsive-lg-class">
-                                    @foreach (var item in Model)
+                                    @foreach (var item in Model.ProductList)
                                     {
                                         <div class="col-xl-3 col-md-4 col-sm-6 ">
                                             <article class="list-product">
@@ -271,28 +267,31 @@
                         <div class="sidebar-widget padding-30px bg-light-gray-2 mb-30px">
                             <h3 class="sidebar-title">دسته بندی ها</h3>
                             <div class="accordion" id="accordionExample">
-                                @* @foreach (var category in Model)
-                                {
-                                    <div class="card">
+                                <div class="card">
+                                    @foreach (var cat in Model.Categoryy)
+                                    {
                                         <div class="card-header" id="headingOne">
-                                                <span data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne" class="collapsed">@category.Name</span>
-                                        </div>
-                                        @if (category.ParentId != null)
-                                        {
-                                            @foreach ()
+                                            @if (cat.ParentId == null)
                                             {
-                                                <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
-                                                    <div class="card-body">
-                                                        <ul class="category-list">
-                                                            <li><a>@category.Name</a></li>
-                                                        </ul>
-                                                    </div>
-                                                </div>
+                                                <a href="@Url.Action("index",new{categoryId=cat.Id})"
+                                                   data-bs-toggle="collapse" data-bs-target="#collapseOne"
+                                                   aria-expanded="false" aria-controls="collapseOne" class="collapsed">@cat.Name</a>
                                             }
-
-                                        }
-                                    </div>
-                                } *@
+                                        </div>
+                                        <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
+                                            <div class="card-body">
+                                                <ul class="category-list">
+                                                    <li>
+                                                        @if (cat.ParentId != null)
+                                                        {
+                                                            <a href="@Url.Action("index",new{categoryId=cat.Id})">@cat.Name</a>
+                                                        }
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    }
+                                </div>
                             </div>
                         </div>
                         <!-- Sidebar single item -->
@@ -308,7 +307,7 @@
                                     <button type="submit" class="btn-dark btn">Filter</button>
                                 </form>
                             </div>
-                            
+
                         </div>
                         <!-- Sidebar single item -->
                     </div>
@@ -437,6 +436,12 @@
             </div>
         </div>
     </div>
+
+    <script>
+        function submit() {
+            var Se
+        }
+    </script>
 
     <script src="/template/static/js/vendor/jquery-3.6.0.min.js"></script>
     <script src="/template/static/js/vendor/bootstrap.bundle.min.js"></script>

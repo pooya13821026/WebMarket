@@ -24,7 +24,7 @@ namespace WebMarke_App.Controllers
 
         public IActionResult Upsert(int? id)
         {
-            ProductVM fieldVM = new()
+            FieldShowcase fieldVM = new()
             {
                 Field = new(),
                 CategoryList = _db.Categories.Select(i => new SelectListItem
@@ -45,7 +45,7 @@ namespace WebMarke_App.Controllers
         }
 
         [HttpPost]
-        public IActionResult Upsert(ProductVM obj)
+        public IActionResult Upsert(FieldShowcase obj)
         {
             if (obj.Field.Id == 0)
             {

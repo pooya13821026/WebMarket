@@ -5,40 +5,40 @@
 }
 
 <form method="post" asp-action="deletepost" enctype="multipart/form-data">
-    <input asp-for="Id" type="hidden" />
-    <input asp-for="Img" type="hidden" />
+    <input asp-for="Id" type="hidden"/>
+    <input asp-for="Img" type="hidden"/>
     <div class="border p-3 mt-4">
         <div class="row pb-2">
             <h2>حذف محصول</h2>
-            <hr />
+            <hr/>
             <div class="mb-3">
-                <label asp-for="Title"></label>
-                <input asp-for="Title" class="form-control" />
-                <span asp-validation-for="Title" class="text-danger"></span>
+                <label asp-for="Title"></label>: 
+                <span>@Model.Title</span>
             </div>
             <div class="mb-3">
-                <label asp-for="Description"></label>
-                <textarea asp-for="Description" class="form-control"></textarea>
-                <span asp-validation-for="Description" class="text-danger"></span>
+                <label asp-for="Description"></label>: 
+                <span>@Model.Description</span>
             </div>
             <div class="row">
                 <div class="col-6 mb-3">
-                    <label asp-for="Price"></label>
-                    <input asp-for="Price" class="form-control" />
-                    <span asp-validation-for="Price" class="text-danger"></span>
+                    <label asp-for="Price"></label>: 
+                    <span>@Model.Price</span>
                 </div>
                 <div class="col-6 mb-3">
-                    <label asp-for="Color"></label>
-                    <input asp-for="Color" class="form-control" />
-                    <span asp-validation-for="Color" class="text-danger"></span>
+                    <label asp-for="Color"></label>: 
+                    <span>@Model.Color</span>
                 </div>
             </div>
             <div class="mb-3">
-                <label asp-for="Img"></label>
-                <input type="file" name="file" class="form-control" />
+                <img style="width: 100px; height: 100px" src="/@Model.Img"/>
             </div>
+            
             <div class="col-12">
                 <button type="submit" class="btn btn-outline-dark m-auto" style="width:150px">حذف محصول</button>
+                <a asp-controller="Products" asp-action="Index" class="btn btn-outline-dark m-auto" style="width:150px">
+                    بازگشت
+                    به لیست
+                </a>
             </div>
         </div>
     </div>

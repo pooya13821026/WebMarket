@@ -23,10 +23,10 @@ namespace WebMarke_App.Controllers
 
         public IActionResult Upsert(int? id)
         {
-            ProductVM valueVM = new()
+            ValueShowcase valueVM = new()
             {
                 Value = new(),
-                ProductList = _db.Products.Select(i => new SelectListItem
+                ProductListValue = _db.Products.Select(i => new SelectListItem
                 {
                     Text = i.Title,
                     Value = i.Id.ToString(),
@@ -49,7 +49,7 @@ namespace WebMarke_App.Controllers
         }
 
         [HttpPost]
-        public IActionResult Upsert(ProductVM obj)
+        public IActionResult Upsert(ValueShowcase obj)
         {
             if (obj.Value.Id == 0)
             {

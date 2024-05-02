@@ -1,5 +1,4 @@
-﻿using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using WebMarke_App.Data;
 using WebMarke_App.Models;
@@ -26,7 +25,7 @@ namespace WebMarke_App.Controllers
 
         public IActionResult Upsert(int? id)
         {
-            ProductVM categoryVM = new()
+            CategoryShowcase categoryVM = new()
             {
                 Category = new(),
                 CategoryList = _db.Categories.Where(x => x.ParentId == null).Select(i => new SelectListItem
@@ -47,7 +46,7 @@ namespace WebMarke_App.Controllers
         }
 
         [HttpPost]
-        public IActionResult Upsert(ProductVM obj)
+        public IActionResult Upsert(CategoryShowcase obj)
         {
             if (obj.Category.Id == 0)
             {
@@ -62,49 +61,6 @@ namespace WebMarke_App.Controllers
                 return RedirectToAction("index");
             }
         }
-
-
-        //[HttpGet]
-        //public IActionResult Create()
-        //{
-        //    return View();
-        //}
-        //[HttpPost]
-        //public IActionResult Create(Category obj)
-        //{
-        //    if (ModelState.IsValid)
-        //    {
-        //        _db.Categories.Add(obj);
-        //        _db.SaveChanges();
-        //        return RedirectToAction("index");
-        //    }
-        //    return View(obj);
-        //}
-        //public IActionResult Edit(int? id)
-        //{
-        //    if (id == null || id == 0)
-        //    {
-        //        return NotFound();
-        //    }
-        //    var categoryFromDbFirst = _db.Categories.FirstOrDefault(i => i.Id == id);
-        //    if (categoryFromDbFirst == null)
-        //    {
-        //        return NotFound();
-        //    }
-        //    return View(categoryFromDbFirst);
-        //}
-        //[HttpPost]
-        //public IActionResult Edit(Category obj)
-        //{
-        //    if (ModelState.IsValid)
-        //    {
-        //        _db.Categories.Update(obj);
-        //        _db.SaveChanges();
-        //        return RedirectToAction("index");
-        //    }
-        //    return View(obj);
-        //}
-
 
         public IActionResult Delete(int? id)
         {

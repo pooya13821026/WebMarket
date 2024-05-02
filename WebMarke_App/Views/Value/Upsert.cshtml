@@ -1,5 +1,5 @@
 ﻿@using WebMarke_App.Models.ViewModel
-@model ProductVM
+@model ValueShowcase
 @{
     ViewData["Title"] = "Upsert";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -18,7 +18,7 @@
             </div>
             <div class="mb-3">
                 <label asp-for="Value.ProductId"></label>
-                <select asp-for="Value.ProductId" asp-items="@Model.ProductList" class="form-select">
+                <select asp-for="Value.ProductId" asp-items="@Model.ProductListValue" class="form-select">
                     <option disabled selected>---انتخاب محصول---</option>
                 </select>
                 <span asp-validation-for="Value.ProductId" class="text-danger"></span>
