@@ -43,6 +43,10 @@ namespace WebMarke_App.Models
         [Required(ErrorMessage = "تصویر اجباریست")]
         [DisplayName("تصویر")]
         [NotMapped]
+        [ValidateNever]
         public IFormFile File { get; set; }
+
+        [ValidateNever]
+        public List<FildeValue> FildeValues { get; set; }
     }
 }

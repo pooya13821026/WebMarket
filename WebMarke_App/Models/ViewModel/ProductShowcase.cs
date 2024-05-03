@@ -16,6 +16,13 @@ namespace WebMarke_App.Models.ViewModel
 
         [ValidateNever]
         public List<Category> Categoryy { get; set; } = [];
+
+        [ValidateNever]
+        public IEnumerable<SelectListItem>? FieldSelect { get; set; }
+
+        public List<Field> FieldList { get; set; } = [];
+
+        public FildeValue? FildeValue { get; set; }
     }
 
     //public class FibSeries : IEnumerable<ulong>

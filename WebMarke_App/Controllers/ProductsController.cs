@@ -1,5 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.EntityFrameworkCore;
+using System.Linq;
 using WebMarke_App.Data;
 using WebMarke_App.Models;
 using WebMarke_App.Models.ViewModel;
@@ -18,7 +20,7 @@ namespace WebMarke_App.Controllers
         }
 
 
-        public IActionResult Index(double min, double max, int? id, string? searche, int? categoryId)
+        public IActionResult Index(double min, double max, int? id, string? searche, int? categoryId, int?[] fieldId, string? value)
         {
             //var products = from product in _db.Products select product;
             //if (id.HasValue)
@@ -39,34 +41,54 @@ namespace WebMarke_App.Controllers
             //var filterPrice = from product in _db.Products select product;
             //filterPrice = _db.Products.Where(f => f.Price >= min && f.Price <= max);
 
-            if (categoryId == null)
+            //if (categoryId == null)
+            //{
+            //    ProductShowcase products = new()
+            //    {
+            //        Categoryy = _db.Categories.ToList(),
+            //        ProductList = _db.Products.ToList()
+            //    };
+            //    return View(products);
+            //}
+            //ProductShowcase filter = new()
+            //{
+            //    Categoryy = _db.Categories.ToList(),
+            //    ProductList = _db.Products.Where(i => i.Id == categoryId).ToList()
+            //};
+            //return View(filter);
+
+            //Console.WriteLine(fieldId);
+            if (value == null)
             {
                 ProductShowcase products = new()
                 {
                     Categoryy = _db.Categories.ToList(),
-                    ProductList = _db.Products.ToList()
+                    ProductList = _db.Products.ToList(),
+                    FieldList = _db.Fields.ToList(),
                 };
                 return View(products);
             }
             ProductShowcase filter = new()
             {
                 Categoryy = _db.Categories.ToList(),
-                ProductList = _db.Products.Where(i => i.Id == categoryId).ToList()
+                ProductList = _db.Products
+                .Where(i => i.FildeValues.Any(x => x.Value.Contains(value) && fieldId.Contains(x.FildeId.Value))).ToList(),
+                FieldList = _db.Fields.ToList(),
             };
             return View(filter);
         }
 
 
-        public IActionResult Upsert(int? id)
+        public async Task<ActionResult> Upsert(int? id)
         {
             ProductShowcase product = new()
             {
                 Product = new(),
-                CategoryList = _db.Categories.Select(i => new SelectListItem
+                CategoryList = await _db.Categories.Select(i => new SelectListItem
                 {
                     Text = i.Name,
                     Value = i.Id.ToString(),
-                }).ToList(),
+                }).ToListAsync(),
             };
             if (id == null || id == 0)
             {
@@ -74,7 +96,7 @@ namespace WebMarke_App.Controllers
             }
             else
             {
-                product.Product = _db.Products.FirstOrDefault(u => u.Id == id);
+                product.Product = await _db.Products.FirstOrDefaultAsync(u => u.Id == id);
                 return View(product);
             }
         }

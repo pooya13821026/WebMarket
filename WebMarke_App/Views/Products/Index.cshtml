@@ -296,7 +296,7 @@
                         </div>
                         <!-- Sidebar single item -->
                         <div class="sidebar-widget-group mt-20 padding-30px">
-                            <h3 class="sidebar-title">فیلتر</h3>
+                            <h3 class="sidebar-title">فیلتر قیمت</h3>
                             <div class="sidebar-widget mt-20">
                                 <h4 class="pro-sidebar-title">قیمت</h4>
                                 <form method="post" asp-action="index">
@@ -307,9 +307,26 @@
                                     <button type="submit" class="btn-dark btn">Filter</button>
                                 </form>
                             </div>
-
                         </div>
                         <!-- Sidebar single item -->
+                        <div class="sidebar-widget-group mt-20 padding-30px">
+                            <h3 class="sidebar-title">فیلتر فیلد</h3>
+                            <div class="sidebar-widget mt-20">
+                                <h4 class="pro-sidebar-title">فیلد</h4>
+                                <form method="post" asp-action="index">
+                                    @{
+                                        var i = 0;
+                                    }
+                                    @foreach (var field in Model.FieldList)
+                                    {
+                                        <label for="fieldId">@field.Filde</label>
+                                        <input name="fieldId[@(i++)]" id="fieldId" type="hidden" value="@field.Id" />
+                                        <input name="value" type="text" class="form-control" />
+                                    }
+                                    <button type="submit" class="btn-dark btn">Filter</button>
+                                </form>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
